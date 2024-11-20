@@ -23,7 +23,11 @@ function install_node() {
     # 将 token 保存到 token.txt 文件中
     echo "$USER_TOKEN" > token.txt
     
-    echo "节点安装完成，token 已成功保存到 token.txt 文件中。"
+    # 使用 screen 启动 python3 main.py
+    screen -S pipe -dm python3 main.py
+
+    echo "节点安装完成，token 已成���保存到 token.txt 文件中。"
+    echo "要查看运行中的 screen 会话，请使用命令: screen -r pipe"
 }
 
 # 主菜单函数
