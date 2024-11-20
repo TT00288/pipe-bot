@@ -10,18 +10,21 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
-# 克隆 Git 仓库
-git clone https://github.com/sdohuajia/pipe.git
-cd pipe || { echo "进入目录失败"; exit 1; }
-
-# 安装 Python 依赖
-pip install -r requirements.txt
-
-# 提示用户输入 token
-read -p "请输入您的 token: " USER_TOKEN
-
-# 将 token 保存到 token.txt 文件中
-echo "$USER_TOKEN" > token.txt
+# 安装节点的函数
+function install_node() {
+    echo "开始安装节点..."
+    git clone https://github.com/sdohuajia/pipe.git
+    cd pipe || { echo "进入目录失败"; exit 1; }
+    pip install -r requirements.txt
+    
+    # 提示用户输入 token
+    read -p "请输入您的 token: " USER_TOKEN
+    
+    # 将 token 保存到 token.txt 文件中
+    echo "$USER_TOKEN" > token.txt
+    
+    echo "节点安装完成，token 已成功保存到 token.txt 文件中。"
+}
 
 # 主菜单函数
 function main_menu() {
@@ -33,14 +36,20 @@ function main_menu() {
         echo "================================================================"
         echo "退出脚本，请按键盘 ctrl + C 退出即可"
         echo "请选择要执行的操作:"
-        # 这里可以添加更多的菜单选项
+        echo "1) 安装节点"
+        echo "2) 退出"
         read -p "输入选项: " option
-        # 根据选项执行相应的操作
+        
         case $option in
-            # 示例选项
-            1) echo "执行操作 1";;
-            2) echo "执行操作 2";;
-            *) echo "无效选项，请重试";;
+            1) 
+                install_node  # 调用安装节点的函数
+                ;;
+            2) 
+                echo "退出脚本。"
+                exit 0
+                ;;
+            *) 
+                echo "无效选项，请重试";;
         esac
     done
 }
