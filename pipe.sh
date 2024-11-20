@@ -28,6 +28,9 @@ function install_node() {
 
     echo "节点安装完成，token 已成���保存到 token.txt 文件中。"
     echo "要查看运行中的 screen 会话，请使用命令: screen -r pipe"
+ 
+    # 提示用户按任意键返回主菜单
+    read -n 1 -s -r -p "按任意键返回主菜单..."
 }
 
 # 主菜单函数
