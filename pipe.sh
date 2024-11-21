@@ -13,6 +13,19 @@ fi
 # 安装节点的函数
 function install_node() {
     echo "开始安装节点..."
+
+     # 检查是否已经存在 pipe 目录
+    if [ -d "pipe" ]; then
+        read -p "pipe 目录已存在，是否删除重新安装？(y/n): " confirm
+        if [ "$confirm" = "y" ]; then
+            rm -rf pipe
+        else
+            echo "安装已取消"
+            read -n 1 -s -r -p "按任意键返回主菜单..."
+            return
+        fi
+    fi
+    
     git clone https://github.com/sdohuajia/pipe.git
     cd pipe || { echo "进入目录失败"; exit 1; }
     pip install -r requirements.txt
