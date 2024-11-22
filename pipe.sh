@@ -39,7 +39,7 @@ function install_node() {
     # 使用 正在使用 tmux 启动 main.py
     tmux new-session -d -s pipe  # 创建新的 tmux 会话，名称为 pipe
     tmux send-keys -t pipe "cd pipe" C-m  # 切换到 pipe 目录
-    tmux send-keys -t pipe "python3 run.py" C-m  # 启动 main.py
+    tmux send-keys -t pipe "python3 main.py" C-m  # 启动 main.py
     
     echo "使用 'tmux attach -t pipe' 命令来查看日志。"
     echo "要退出 tmux 会话，请按 Ctrl+B 然后按 D。"
