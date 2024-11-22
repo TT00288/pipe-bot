@@ -24,6 +24,12 @@ function install_node() {
             read -n 1 -s -r -p "按任意键返回主菜单..."
             return
         fi
+
+      # 检查并终止已存在的 pipe tmux 会话
+    if tmux has-session -t pipe 2>/dev/null; then
+        echo "检测到正在运行的 pipe 会话，正在终止..."
+        tmux kill-session -t pipe
+        echo "已终止现有的 pipe 会话。"
     fi
     
     git clone https://github.com/sdohuajia/pipe.git
