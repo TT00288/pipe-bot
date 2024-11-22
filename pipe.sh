@@ -36,12 +36,13 @@ function install_node() {
     # 将 token 保存到 token.txt 文件中
     echo "$USER_TOKEN" > token.txt
     
-    # 使用 screen 创建新会话并启动 python3 main.py
-    screen -dmS pipe
-    screen -S pipe -X stuff "python3 main.py$(printf \\r)"
-
-    echo "节点安装完成，token 已成���保存到 token.txt 文件中。"
-    echo "要查看运行中的 screen 会话，请使用命令: screen -r pipe"
+    # 使用 正在使用 tmux 启动 main.py
+    tmux new-session -d -s dawn  # 创建新的 tmux 会话，名称为 dawn
+    tmux send-keys -t dawn "cd pipe" C-m  # 切换到 Dawn 目录
+    tmux send-keys -t dawn "python3 run.py" C-m  # 启动 main.py
+    
+    echo "使用 'tmux attach -t pipe' 命令来查看日志。"
+    echo "要退出 tmux 会话，请按 Ctrl+B 然后按 D。"
  
     # 提示用户按任意键返回主菜单
     read -n 1 -s -r -p "按任意键返回主菜单..."
