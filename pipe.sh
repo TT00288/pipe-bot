@@ -24,6 +24,7 @@ function install_node() {
             read -n 1 -s -r -p "按任意键返回主菜单..."
             return
         fi
+    fi
 
       # 检查并终止已存在的 pipe tmux 会话
     if tmux has-session -t pipe 2>/dev/null; then
