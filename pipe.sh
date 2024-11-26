@@ -40,8 +40,21 @@ function install_node() {
     # 提示用户输入 token
     read -p "请输入您的 token: " USER_TOKEN
     
-    # 将 token 保存到 token.txt 文件中
-    echo "$USER_TOKEN" > token.txt
+    # 提示用户输入邮箱
+    read -p "请输入您的邮箱: " USER_EMAIL
+    
+    # 将 token 和邮箱保存到 token.txt 文件中
+    echo "$USER_TOKEN,$USER_EMAIL" > token.txt
+
+    # 提示用户输入代理IP
+    read -p "请输入代理IP (如需本地直连，请直接回车): " USER_PROXY
+    
+    # 如果用户输入了代理IP，则保存到 proxy.txt 文件中
+    if [ -n "$USER_PROXY" ]; then
+        echo "$USER_PROXY" > proxy.txt
+    else
+        echo "未输入代理IP，将使用本地直连。"
+    fi
     
     # 使用 正在使用 tmux 启动 main.py
     tmux new-session -d -s pipe  # 创建新的 tmux 会话，名称为 pipe
@@ -65,7 +78,7 @@ function main_menu() {
         echo "================================================================"
         echo "退出脚本，请按键盘 ctrl + C 退出即可"
         echo "请选择要执行的操作:"
-        echo "1) 安装节点"
+        echo "1) 安装PiPe节点"
         echo "2) 退出"
         read -p "输入选项: " option
         
