@@ -34,16 +34,10 @@ install_python
 function install_node() {
     echo "开始安装节点..."
 
-     # 检查是否已经存在 pipe 目录
+     # 检查是否已经存在 pipe 目录 
     if [ -d "pipe" ]; then
-        read -p "pipe 目录已存在，是否删除重新安装？(y/n): " confirm
-        if [ "$confirm" = "y" ]; then
-            rm -rf pipe
-        else
-            echo "安装已取消"
-            read -n 1 -s -r -p "按任意键返回主菜单..."
-            return
-        fi
+        echo "pipe 目录已存在，正在删除并重新安装..."
+        rm -rf pipe
     fi
 
       # 检查并终止已存在的 pipe tmux 会话
