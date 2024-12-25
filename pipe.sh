@@ -10,7 +10,25 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
-sudo apt install git -y
+# 安装必要的依赖
+function install_dependencies() {
+    echo "安装必要的依赖..."
+    apt update && apt upgrade -y
+    apt install -y curl wget gcc git
+}
+
+# 安装 Python 3.11 
+function install_python() {
+    echo "安装 Python 3.11..."
+    add-apt-repository ppa:deadsnakes/ppa -y
+    apt install -y python3.11 python3.11-venv python3.11-dev python3-pip
+
+    echo "验证 Python 版本..."
+    python3.11 --version
+}
+
+install_dependencies
+install_python
 
 # 安装节点的函数
 function install_node() {
@@ -49,7 +67,7 @@ function install_node() {
     echo "$USER_TOKEN,$USER_EMAIL" > token.txt
 
     # 提示用户输入代理IP---请输入代理IP (如需本地直连，请直接回车)
-    USER_PROXY
+    USER_PROXY=''
     
     # 如果用户输入了代理IP，则保存到 proxy.txt 文件中
     if [ -n "$USER_PROXY" ]; then
