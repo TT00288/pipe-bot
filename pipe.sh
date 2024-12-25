@@ -66,8 +66,6 @@ function install_node() {
     echo "使用 'tmux attach -t pipe' 命令来查看日志。"
     echo "要退出 tmux 会话，请按 Ctrl+B 然后按 D。"
  
-    # 提示用户按任意键返回主菜单
-    read -n 1 -s -r -p "按任意键返回主菜单..."
 }
 
 install_node
