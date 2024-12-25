@@ -10,6 +10,8 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
+sudo apt install git -y
+
 # 安装节点的函数
 function install_node() {
     echo "开始安装节点..."
